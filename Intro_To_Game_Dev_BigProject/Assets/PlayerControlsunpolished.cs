@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControls : MonoBehaviour {
+public class PlayerControlsunpolished : MonoBehaviour {
     bool jumping = false;
     bool onGround = true;
    bool goingLeft = false;
