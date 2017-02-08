@@ -3,7 +3,10 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
     bool onGround = true;
+    bool isJumping = false;
     bool onWall = false;
+    bool enemyHit = false;
+    public Vector2 enemyKnockback;
     int inAirDashCount = 0;
     float curJmpVel;
     Rigidbody2D playerRB;
@@ -16,12 +19,15 @@ public class PlayerControls : MonoBehaviour {
     public Vector2 rightForce;
     public Vector2 downForce;
     public Vector2 jumpForce;
+    public Vector2 jumpForceHold;
     public float dashForce;
     public LayerMask groundLayer;
     public float movementForce;
     Vector2 movementDirection = Vector2.zero;
     Vector2 dashDirection = Vector2.zero; 
     public Vector2 wallNormal;
+    float LOP;
+    float bufferTime = .066f;
 	// Use this for initialization
 	void Start () {
         playerRB = GetComponent<Rigidbody2D>();
@@ -29,6 +35,14 @@ public class PlayerControls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (onGround)
+        {
+            LOP = 0;
+        }
+        else
+        {
+            LOP += Time.deltaTime;
+        }
         float rayDistance = (transform.localScale.y * 0.5f) + 0.5f;
         onGround = Physics2D.Raycast(transform.position, Vector2.down, rayDistance, groundLayer);
         //Debug.Log("ground; " + onGround);
@@ -47,19 +61,41 @@ public class PlayerControls : MonoBehaviour {
 
     void FixedUpdate () {
         thePlayer.AddForce(movementDirection * movementForce);
+        if (isJumping == true)
+        {
+            thePlayer.AddForce(jumpForceHold, ForceMode2D.Impulse);
+        }
 
     }
 
     void movement()
     {
+        if (LOP < bufferTime)
+        {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                if (onGround)
-                {
-                    jumps();
-                }
+                thePlayer.AddForce(jumpForce, ForceMode2D.Impulse);
                
             }
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            isJumping = false;
+        }
+            
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (LOP < bufferTime)
+            {
+                jumps();
+            }
+            else
+            {
+                isJumping = false;
+               
+            }
+
+        }
             if (Input.GetKeyDown(KeyCode.S))
             {
                 goDown();
@@ -91,7 +127,7 @@ public class PlayerControls : MonoBehaviour {
 
     void jumps()
     {
-        thePlayer.AddForce(jumpForce, ForceMode2D.Impulse);
+        isJumping = true;
     }
 
     void WallJump (Vector2 wallNormal) {
@@ -149,6 +185,35 @@ public class PlayerControls : MonoBehaviour {
 
     }
 
+    void EnemyCollision()
+    {
+        if (enemyHit == true)
+        {
+            
+            thePlayer.AddForce(enemyKnockback, ForceMode2D.Impulse);
+           
+//                float x = 0;
+//                x += Time.deltaTime;
+//                float movFor = movementForce;
+//                Debug.Log(x);
+//                Debug.Log(movFor);
+//                if (x < 2f)
+//                {
+//
+////                    movementForce = 0;
+//                }
+//                if (x >=2f)
+//                {
+//                    Debug.Log("ooo");
+//                    movementForce = movFor;
+
+
+                
+            }
+           
+        }
+
+
     void OnCollisionStay2D(Collision2D c)
     {
         if (c.gameObject.tag == "wall")
@@ -163,7 +228,29 @@ public class PlayerControls : MonoBehaviour {
             onWall = true;
 
         }
+        if (c.gameObject.tag == "enemy")
+        {
+            thePlayer.AddForce(enemyKnockback, ForceMode2D.Impulse);
+
+//            int x = 0;
+//                        x++;
+//                        float movFor = movementForce;
+//                        if (x < 3)
+//                        {
+//                
+//                             movementForce = 0;
+//                        }
+//                        if (x >3)
+//                        {
+//                             movementForce = 60;
+                            
+            //                enemyHit = false;
+           enemyHit = true;
+           
+
+        }
     }
+
 
     void OnCollisionExit2D(Collision2D c)
     {
@@ -171,5 +258,11 @@ public class PlayerControls : MonoBehaviour {
         {
             onWall = false;
         }
+
+        if (c.gameObject.tag == "enemy")
+        {
+            
+            EnemyCollision();
+}
     }
 }
