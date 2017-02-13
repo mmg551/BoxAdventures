@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndOfLevel : MonoBehaviour {
     public GameObject victoryScreen;
     public GameObject mycamera;
     public GameObject theTimer;
+    public Text yourTime;
+    public Text otherTime;
+    bool over = false;
+    bool again = false;
 
     Timer myTime;
 	// Use this for initialization
@@ -18,7 +23,7 @@ public class EndOfLevel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+       
 	}
 
     void Savetime()
@@ -31,11 +36,51 @@ public class EndOfLevel : MonoBehaviour {
     {
         if (c.gameObject.tag == "Player")
         {
+            
             Savetime();
             Debug.Log("anything");
             Debug.Log(myTime.time);
             Time.timeScale = 0.0f;
             victoryScreen.gameObject.SetActive(true);
+            yourTime = otherTime;
         }
+    }
+
+    void retry()
+    {
+        
+    }
+    public void Overworld(int overworld)
+    {
+
+        Time.timeScale = 1.0f;
+        victoryScreen.gameObject.SetActive (false);
+        SceneManager.LoadScene(overworld);
+
+
+    }
+
+    void sceneChanging()
+    {
+        if (over == true)
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if (again == true)
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void TryAgain ()
+    {
+        
+        Time.timeScale = 1.0f;
+        //loads scene of whatever number i put in the box 
+        victoryScreen.gameObject.SetActive (false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
     }
 }

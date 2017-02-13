@@ -11,7 +11,7 @@ public class LockCamera : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         
-        myCam.orthographicSize = Mathf.Lerp(myCam.orthographicSize, 30f + Vector3.Magnitude(transform.root.gameObject.GetComponent<Rigidbody2D>().velocity),.01f);
+        myCam.orthographicSize = Mathf.Lerp(myCam.orthographicSize, 10f + Vector3.Magnitude(transform.root.gameObject.GetComponent<Rigidbody2D>().velocity),.003f);
         transform.rotation = Quaternion.identity;
     } //locks camera on player and makes it so that the velocity of the player determines the camera size.
     //om not 100% sure how it works, Chris did it

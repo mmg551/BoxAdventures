@@ -26,11 +26,16 @@ public class PlayerControls : MonoBehaviour {
     Vector2 movementDirection = Vector2.zero;
     Vector2 dashDirection = Vector2.zero; 
     public Vector2 wallNormal;
+    public SpriteRenderer mySprite;
+    public SpriteRenderer mySprite1;
+    public SpriteRenderer mySprite2;
     float LOP;
     float bufferTime = .066f;
+
 	// Use this for initialization
 	void Start () {
         playerRB = GetComponent<Rigidbody2D>();
+
 	}
 	
 	// Update is called once per frame
@@ -104,14 +109,18 @@ public class PlayerControls : MonoBehaviour {
 
         int x = BoolToInt(Input.GetKey(KeyCode.D)) - BoolToInt(Input.GetKey(KeyCode.A));
         movementDirection = new Vector2(x, 0);
-//        if (x < 0)
-//        {
-//          
-//        }
-//        if (x > 0)
-//        {
-//
-//        }
+        if (x < 0)
+        {
+            mySprite.flipX = true;
+            mySprite1.flipX = true;
+            mySprite2.flipX = true;
+        }
+        if (x > 0)
+        {
+           mySprite.flipX = false;
+            mySprite1.flipX = false;
+            mySprite2.flipX = false;
+        }
     }
 
     int BoolToInt (bool b) {
@@ -265,4 +274,6 @@ public class PlayerControls : MonoBehaviour {
             EnemyCollision();
 }
     }
+
+
 }
