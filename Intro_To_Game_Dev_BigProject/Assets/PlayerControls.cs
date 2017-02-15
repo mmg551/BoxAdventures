@@ -29,6 +29,7 @@ public class PlayerControls : MonoBehaviour {
     public SpriteRenderer mySprite;
     public SpriteRenderer mySprite1;
     public SpriteRenderer mySprite2;
+    public Vector2 wallForce;
     float LOP;
     float bufferTime = .066f;
 
@@ -144,7 +145,7 @@ public class PlayerControls : MonoBehaviour {
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0);
         }
-        thePlayer.AddForce(jumpForce + (wallNormal * (jumpForce.y * 0.5f)), ForceMode2D.Impulse);
+        thePlayer.AddForce(new Vector2(wallForce.x * Mathf.Sign(wallNormal.x),wallForce.y), ForceMode2D.Impulse);
         Debug.Log("jumP");
     }
         
@@ -156,14 +157,14 @@ public class PlayerControls : MonoBehaviour {
 
     void dash()
     {
-        if (onGround || onWall)
+        if (onGround)
         {
             inAirDashCount = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround || onWall)
+            if (onGround)
             {
                 GoDash();
             }
