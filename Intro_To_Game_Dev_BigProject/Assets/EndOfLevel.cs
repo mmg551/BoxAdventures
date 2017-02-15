@@ -9,9 +9,9 @@ public class EndOfLevel : MonoBehaviour {
     public GameObject theTimer;
     public Text yourTime;
     public Text otherTime;
+    public int levelNumber;
     bool over = false;
     bool again = false;
-
     Timer myTime;
 	// Use this for initialization
 	void Start () {
@@ -29,7 +29,7 @@ public class EndOfLevel : MonoBehaviour {
     void Savetime()
     {
         Debug.Log(myTime);
-        PlayerPrefs.SetFloat("bestTime", myTime.time);
+        PlayerPrefs.SetFloat("bestTime" + levelNumber, myTime.time);
     }
 
     void OnCollisionEnter2D(Collision2D c)

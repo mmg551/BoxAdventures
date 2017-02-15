@@ -156,14 +156,14 @@ public class PlayerControls : MonoBehaviour {
 
     void dash()
     {
-        if (onGround)
+        if (onGround || onWall)
         {
             inAirDashCount = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround)
+            if (onGround || onWall)
             {
                 GoDash();
             }

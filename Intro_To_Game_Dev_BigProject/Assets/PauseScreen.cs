@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseScreen : MonoBehaviour {
 
     public GameObject canvas;
-    public GameObject myCamera;
+//    public GameObject myCamera;
     bool Paused = false;
 
 	// Use this for initialization
