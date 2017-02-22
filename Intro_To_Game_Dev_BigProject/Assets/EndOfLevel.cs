@@ -12,6 +12,7 @@ public class EndOfLevel : MonoBehaviour {
     public int levelNumber;
     bool over = false;
     bool again = false;
+    public bool levelDone;
     Timer myTime;
 	// Use this for initialization
 	void Start () {
@@ -40,9 +41,11 @@ public class EndOfLevel : MonoBehaviour {
             Savetime();
             Debug.Log("anything");
             Debug.Log(myTime.time);
+            bool levelDone = true;
             Time.timeScale = 0.0f;
             victoryScreen.gameObject.SetActive(true);
             yourTime = otherTime;
+
         }
     }
 

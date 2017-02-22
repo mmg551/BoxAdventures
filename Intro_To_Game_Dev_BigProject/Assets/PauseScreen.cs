@@ -12,6 +12,7 @@ public class PauseScreen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         canvas.gameObject.SetActive (false);
+
 	}
 	
 	// Update is called once per frame

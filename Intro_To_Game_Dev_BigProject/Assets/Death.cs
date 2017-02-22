@@ -6,6 +6,7 @@ public class Death : MonoBehaviour {
      
     public GameObject restartScreen;
     bool outOfBounds = false;
+    public bool dead = false;
 	// Use this for initialization
 	void Start () {
         restartScreen.gameObject.SetActive(false); 
@@ -21,6 +22,7 @@ public class Death : MonoBehaviour {
         if (c.gameObject.tag == "Player")
         {
             outOfBounds = true;
+            dead = true;
             FellOutOfBounds();
         }
     }
