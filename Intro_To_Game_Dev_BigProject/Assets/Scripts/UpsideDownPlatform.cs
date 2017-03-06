@@ -21,7 +21,7 @@ public class UpsideDownPlatform : MonoBehaviour {
             upsideDown();
             if (Input.GetKeyDown(KeyCode.W))
             {
-                thePlayer.AddForce(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().jumpForceHold, ForceMode2D.Impulse);
+                thePlayer.AddForce(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().jumpForce, ForceMode2D.Impulse);
             }
            
         }
@@ -76,5 +76,9 @@ public class UpsideDownPlatform : MonoBehaviour {
     {
         Debug.Log("hit");
         thePlayer.AddForce(upsideDownForce, ForceMode2D.Force);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            thePlayer.AddForce(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().jumpForceHold, ForceMode2D.Impulse);
+        }
     }
 }

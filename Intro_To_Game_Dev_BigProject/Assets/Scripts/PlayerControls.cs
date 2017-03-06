@@ -214,6 +214,14 @@ public class PlayerControls : MonoBehaviour {
         }
        
     }
+    void JumpInClimb()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            thePlayer.AddForce(jumpForce, ForceMode2D.Impulse);
+        }
+
+    }
 
     void EnemyCollision()
     {
@@ -253,6 +261,7 @@ public class PlayerControls : MonoBehaviour {
         if (c.gameObject.tag == "climb")
         {
             ExitClimb();
+            JumpInClimb();
         }
     }
 
@@ -269,7 +278,7 @@ public class PlayerControls : MonoBehaviour {
         }
         if (c.gameObject.tag == "climb")
         {
-
+            JumpInClimb();
             onClimb = true;
 
         }
@@ -291,7 +300,7 @@ public class PlayerControls : MonoBehaviour {
 }
         if (c.gameObject.tag == "climb")
         {
-
+            JumpInClimb();
             onClimb = false;
             ExitClimb();
         }

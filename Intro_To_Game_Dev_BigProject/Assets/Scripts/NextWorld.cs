@@ -6,6 +6,11 @@ public class NextWorld : MonoBehaviour {
     public GameObject myObject;
     public GameObject otherObject;
     public GameObject theObject;
+    public GameObject myObject2;
+    public GameObject otherObject2;
+    public GameObject theObject2;
+
+
 	// Use this for initialization
 	void Start () {
         
@@ -34,6 +39,21 @@ public class NextWorld : MonoBehaviour {
         {
             otherObject.GetComponent<Renderer>().material.color = Color.cyan;
             Destroy(myObject);
+        }
+        //2nd world
+        if (PlayerPrefs.HasKey("newTime" + 11) && PlayerPrefs.HasKey("newTime" + 12) && PlayerPrefs.HasKey("newTime" + 13) &&
+            PlayerPrefs.HasKey("newTime" + 14) && PlayerPrefs.HasKey("newTime" + 15))
+        {
+            theObject2.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+
+        if (PlayerPrefs.HasKey("newTime" + 11) && PlayerPrefs.HasKey("newTime" + 12) && PlayerPrefs.HasKey("newTime" + 13) &&
+            PlayerPrefs.HasKey("newTime" + 14) && PlayerPrefs.HasKey("newTime" + 15) && PlayerPrefs.HasKey("newTime" + 16) &&
+            PlayerPrefs.HasKey("newTime" + 17) && PlayerPrefs.HasKey("newTime" + 18) && PlayerPrefs.HasKey("newTime" + 19) &&
+            PlayerPrefs.HasKey("newTime" + 20))
+        {
+            otherObject2.GetComponent<Renderer>().material.color = Color.cyan;
+            Destroy(myObject2);
         }
 
 
