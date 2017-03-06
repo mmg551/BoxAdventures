@@ -4,9 +4,10 @@ using System.Collections;
 public class UpsideDownPlatform : MonoBehaviour {
 //    public bool isTrigger; 
     public Rigidbody2D thePlayer;
-    public Collider2D square;
+   
     public bool climbing;
     public Vector2 upsideDownForce;
+    public Collider2D myBox;
 
 	// Use this for initialization
 	void Start () {
@@ -18,35 +19,42 @@ public class UpsideDownPlatform : MonoBehaviour {
         if (climbing == true)
         {
             upsideDown();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                thePlayer.AddForce(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().jumpForceHold, ForceMode2D.Impulse);
+            }
+           
         }
+
+
 
 	}
     void FixedUpdate()
     {
         
-        if (climbing == true)
-        {
-            onTriggerEnter2D(square);
-            upsideDown();
-        }
+       
     }
 
-    void onTriggerEnter2D(Collider2D c)
+   
+
+    void OnTriggerEnter2D(Collider2D c)
     {
         if (c.gameObject.tag == "Player")
         {
             Debug.Log("hi");
 //            isTrigger = true;
             climbing = true;
+            upsideDown();
 
         }
     }
 
-    void onTriggerStay2D(Collider2D c)
+    void OnTriggerStay2D(Collider2D c)
     {
         if(c.gameObject.tag == "Player")
         {
             climbing = true;
+            upsideDown();
 
         }
 
@@ -55,7 +63,7 @@ public class UpsideDownPlatform : MonoBehaviour {
 
 
 
-    void onTriggerExit2D(Collider2D c)
+    void OnTriggerExit2D(Collider2D c)
     {
 
         if(c.gameObject.tag == "Player")

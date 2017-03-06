@@ -41,7 +41,7 @@ public class EndOfLevel : MonoBehaviour {
             Savetime();
             Debug.Log("anything");
             Debug.Log(myTime.time);
-            bool levelDone = true;
+            levelDone = true;
             Time.timeScale = 0.0f;
             victoryScreen.gameObject.SetActive(true);
             yourTime = otherTime;

@@ -34,3 +34,6 @@
 /Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/MichaelMoerdler-Green/BoxAdventures/Intro_To_Game_Dev_BigProject/Temp/bin/Debug/UnityEngine.VR.dll

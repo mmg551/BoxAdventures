@@ -19,7 +19,10 @@ public class PauseScreen : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu();
+            if (!GameObject.FindGameObjectWithTag("goal").GetComponent<EndOfLevel>().levelDone && !GameObject.FindGameObjectWithTag("death").GetComponent<Death>().dead)
+            {
+                pauseMenu();
+            }
         }
 	
 	}

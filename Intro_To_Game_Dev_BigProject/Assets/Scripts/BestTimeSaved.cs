@@ -7,6 +7,7 @@ public class BestTimeSaved : MonoBehaviour {
     public int levelNumber;
     float[] theBest = new float[30];
     float[] newTime = new float[30];
+    public bool levelDone = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class BestTimeSaved : MonoBehaviour {
                 {
                     if (newTime[levelNumber] < theBest[levelNumber])
                     {
+                        levelDone = true;
                         PlayerPrefs.SetFloat("bestTime" + levelNumber, newTime[levelNumber]);
                         bestTime.text = PlayerPrefs.GetFloat("bestTime" + levelNumber).ToString();
                         theBest[levelNumber] = newTime[levelNumber];
@@ -27,6 +29,7 @@ public class BestTimeSaved : MonoBehaviour {
                 }
                 else
                 {
+                    levelDone = true;
                     theBest[levelNumber] = newTime[levelNumber];
                     PlayerPrefs.SetFloat("bestTime" + levelNumber, newTime[levelNumber]);
                     bestTime.text = PlayerPrefs.GetFloat("bestTime" + levelNumber).ToString();

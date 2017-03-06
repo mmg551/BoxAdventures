@@ -6,7 +6,7 @@ public class LevelSelect : MonoBehaviour {
     public Canvas preview;
     public Canvas number;
     public int level;
-
+    public bool LevelComplete = false;
 	// Use this for initialization
 	void Start () {
         number.gameObject.SetActive(true);
@@ -47,5 +47,5 @@ public class LevelSelect : MonoBehaviour {
             preview.gameObject.SetActive(false);
         }
     }
-        
+   
 }

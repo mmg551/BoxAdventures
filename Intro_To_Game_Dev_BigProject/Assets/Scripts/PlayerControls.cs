@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour {
     bool isJumping = false;
     bool onWall = false;
     bool enemyHit = false;
-    bool climbing = false;
+     
     public Vector2 enemyKnockback;
     int inAirDashCount = 0;
     float curJmpVel;
@@ -40,7 +40,7 @@ public class PlayerControls : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerRB = GetComponent<Rigidbody2D>();
-
+       
 	}
 	
 	// Update is called once per frame
@@ -77,7 +77,7 @@ public class PlayerControls : MonoBehaviour {
         {
             thePlayer.AddForce(jumpForceHold, ForceMode2D.Impulse);
         }
-        if (climbing == true)
+        if (onClimb == true)
         {
             thePlayer.AddForce(upsideDownForce, ForceMode2D.Force);
         }
@@ -165,16 +165,17 @@ public class PlayerControls : MonoBehaviour {
        
     }
 
+
     void dash()
     {
-        if (onGround)
+        if (onGround || onClimb)
         {
             inAirDashCount = 0;
         }
-
+//        GameObject.FindGameObjectWithTag("climb").GetComponent<ClimbingPlatform>().nowClimb
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround)
+            if (onGround ||onClimb )
             {
                 GoDash();
             }
@@ -203,6 +204,15 @@ public class PlayerControls : MonoBehaviour {
         thePlayer.AddForce(dashDirection, ForceMode2D.Impulse);
 
 
+    }
+
+    void ExitClimb()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            thePlayer.AddForce(upsideDownForce, ForceMode2D.Impulse);
+        }
+       
     }
 
     void EnemyCollision()
@@ -240,6 +250,10 @@ public class PlayerControls : MonoBehaviour {
         {
             wallNormal = c.contacts[0].normal;
         }
+        if (c.gameObject.tag == "climb")
+        {
+            ExitClimb();
+        }
     }
 
     void OnCollisionEnter2D (Collision2D c) {
@@ -256,7 +270,7 @@ public class PlayerControls : MonoBehaviour {
         if (c.gameObject.tag == "climb")
         {
 
-            climbing = true;
+            onClimb = true;
 
         }
     }
@@ -275,6 +289,12 @@ public class PlayerControls : MonoBehaviour {
             
             EnemyCollision();
 }
+        if (c.gameObject.tag == "climb")
+        {
+
+            onClimb = false;
+            ExitClimb();
+        }
     }
 
 
