@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class BestTimeSaved : MonoBehaviour {
     public Text bestTime;
     public int levelNumber;
-    float[] theBest = new float[30];
-    float[] newTime = new float[30];
+    float[] theBest = new float[31];
+    float[] newTime = new float[31];
     public bool levelDone = false;
 
 	// Use this for initialization

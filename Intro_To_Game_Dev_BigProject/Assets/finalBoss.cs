@@ -9,6 +9,7 @@ public class finalBoss : MonoBehaviour {
     public float endDistance;
     public float speed;
     public float fastSpeed;
+    public float finalStretchSpeed;
     float increment = 0;
 	// Use this for initialization
 	void Start () {
@@ -18,13 +19,23 @@ public class finalBoss : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        transform.position = Vector3.Lerp(startHere,endHere,increment);
-        increment += speed;
-        if (thePlayer.transform.position.x >= 0)
+	void Update ()
+    {
+        if (!GameObject.FindGameObjectWithTag("pause").GetComponent<PauseScreen>().Paused)
         {
-            speed = 0;
-            increment += fastSpeed;
+            transform.position = Vector3.Lerp(startHere, endHere, increment);
+            increment += speed;
+            if (thePlayer.transform.position.x > 0)
+            {
+                speed = 0;
+                increment += fastSpeed;
+            }
+            if (thePlayer.transform.position.x > 4000)
+            {
+                speed = 0;
+                fastSpeed = 0;
+                increment += finalStretchSpeed;
+            }
         }
-	}
+    }
 }

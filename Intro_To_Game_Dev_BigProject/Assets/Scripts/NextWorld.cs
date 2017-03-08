@@ -9,6 +9,9 @@ public class NextWorld : MonoBehaviour {
     public GameObject myObject2;
     public GameObject otherObject2;
     public GameObject theObject2;
+    public GameObject myObject3;
+    public GameObject otherObject3;
+    public GameObject theObject3;
 
 
 	// Use this for initialization
@@ -55,7 +58,20 @@ public class NextWorld : MonoBehaviour {
             otherObject2.GetComponent<Renderer>().material.color = Color.cyan;
             Destroy(myObject2);
         }
+        //2nd world
+        if (PlayerPrefs.HasKey("newTime" + 21) && PlayerPrefs.HasKey("newTime" + 22) && PlayerPrefs.HasKey("newTime" + 23) &&
+            PlayerPrefs.HasKey("newTime" + 24) && PlayerPrefs.HasKey("newTime" + 25))
+        {
+            theObject3.GetComponent<Renderer>().material.color = Color.cyan;
+        }
 
+        if (PlayerPrefs.HasKey("newTime" + 21) && PlayerPrefs.HasKey("newTime" + 22) && PlayerPrefs.HasKey("newTime" + 23) &&
+            PlayerPrefs.HasKey("newTime" + 24) && PlayerPrefs.HasKey("newTime" + 25) && PlayerPrefs.HasKey("newTime" + 26) &&
+            PlayerPrefs.HasKey("newTime" + 27) && PlayerPrefs.HasKey("newTime" + 28) && PlayerPrefs.HasKey("newTime" + 29))
+        {
+            otherObject3.GetComponent<Renderer>().material.color = Color.cyan;
+            Destroy(myObject3);
+        }
 
     }
     void ChangeColorToBlack()

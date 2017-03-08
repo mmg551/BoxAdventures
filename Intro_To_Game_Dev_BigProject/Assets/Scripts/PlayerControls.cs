@@ -45,6 +45,7 @@ public class PlayerControls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (onGround)
         {
             LOP = 0;

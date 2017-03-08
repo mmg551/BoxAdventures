@@ -7,7 +7,7 @@ public class PauseScreen : MonoBehaviour {
 
     public GameObject canvas;
 //    public GameObject myCamera;
-    bool Paused = false;
+    public bool Paused = false;
 
 	// Use this for initialization
 	void Start () {
