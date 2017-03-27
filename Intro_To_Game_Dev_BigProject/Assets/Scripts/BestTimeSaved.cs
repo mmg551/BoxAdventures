@@ -8,6 +8,7 @@ public class BestTimeSaved : MonoBehaviour {
     float[] theBest = new float[31];
     float[] newTime = new float[31];
     public bool levelDone = false;
+  
 
 	// Use this for initialization
 	void Start () {
@@ -42,14 +43,16 @@ public class BestTimeSaved : MonoBehaviour {
             theBest[levelNumber] = 0;
             bestTime.text = "0000";
         }
-	}
+       
+    }
+	
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-    public void getTime()
+    public void TheFirstWorldTime()
     {
-        
-    }
+    } 
+
 }

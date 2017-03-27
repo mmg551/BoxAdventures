@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour {
     bool isJumping = false;
     bool onWall = false;
     bool enemyHit = false;
-     
+    int numOfWalls = 0;
     public Vector2 enemyKnockback;
     int inAirDashCount = 0;
     float curJmpVel;
@@ -36,7 +36,11 @@ public class PlayerControls : MonoBehaviour {
     public Vector2 upsideDownForce;
     float LOP;
     float bufferTime = .066f;
-
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
+    public AudioClip downSound;
+    public AudioClip climbSound;
+    public AudioClip bounceSound;
 	// Use this for initialization
 	void Start () {
         playerRB = GetComponent<Rigidbody2D>();
@@ -65,6 +69,7 @@ public class PlayerControls : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
+                Debug.Log("is it working");
                 WallJump(wallNormal);
 
 
@@ -91,6 +96,7 @@ public class PlayerControls : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
+                Sound.me.PlaySound(jumpSound, 1f);
                 thePlayer.AddForce(jumpForce, ForceMode2D.Impulse);
                
             }
@@ -152,6 +158,8 @@ public class PlayerControls : MonoBehaviour {
     }
 
     void WallJump (Vector2 wallNormal) {
+        Sound.me.PlaySound(climbSound, 1f);
+        Sound.me.PlaySound(jumpSound, 1f);
         if (playerRB.velocity.y < 0)
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0);
@@ -162,6 +170,7 @@ public class PlayerControls : MonoBehaviour {
         
     void goDown()
     {
+        Sound.me.PlaySound(downSound, .5f);
         thePlayer.AddForce(downForce, ForceMode2D.Impulse);
        
     }
@@ -199,6 +208,7 @@ public class PlayerControls : MonoBehaviour {
 
     void GoDash()
     {
+        Sound.me.PlaySound(dashSound, 1f);
         int x = BoolToInt(Input.GetKey(KeyCode.D)) - BoolToInt(Input.GetKey(KeyCode.A));
         int y  = BoolToInt(Input.GetKey(KeyCode.W)) - BoolToInt(Input.GetKey(KeyCode.S));
         dashDirection = new Vector2(dashForce * x, dashForce * y);
@@ -269,8 +279,9 @@ public class PlayerControls : MonoBehaviour {
     void OnCollisionEnter2D (Collision2D c) {
         if (c.gameObject.tag == "wall")
         {
+            
             onWall = true;
-
+            numOfWalls += 1;
         }
         if (c.gameObject.tag == "enemy")
         {
@@ -283,6 +294,10 @@ public class PlayerControls : MonoBehaviour {
             onClimb = true;
 
         }
+        if (c.gameObject.tag == "bounce")
+        {
+            Sound.me.PlaySound(bounceSound, 1f);
+        }
     }
 
 
@@ -291,7 +306,12 @@ public class PlayerControls : MonoBehaviour {
     {
         if (c.gameObject.tag == "wall")
         {
-            onWall = false;
+            numOfWalls -= 1;
+            if (numOfWalls == 0)
+            {
+           
+                onWall = false;
+            }
         }
 
         if (c.gameObject.tag == "enemy")
@@ -307,5 +327,8 @@ public class PlayerControls : MonoBehaviour {
         }
     }
 
-
+//    public void PlayHitSound()
+//    {
+//        Sound.me.PlaySound(hitsnds[Random.Range(0, hitsnds.length)], 1f);
+//    }
 }

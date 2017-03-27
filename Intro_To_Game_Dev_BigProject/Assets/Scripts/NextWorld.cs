@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NextWorld : MonoBehaviour {
     public GameObject myObject;
@@ -12,7 +13,7 @@ public class NextWorld : MonoBehaviour {
     public GameObject myObject3;
     public GameObject otherObject3;
     public GameObject theObject3;
-
+    public Text worldTime1;
 
 	// Use this for initialization
 	void Start () {
@@ -72,7 +73,10 @@ public class NextWorld : MonoBehaviour {
             otherObject3.GetComponent<Renderer>().material.color = Color.cyan;
             Destroy(myObject3);
         }
-
+        worldTime1.text = (PlayerPrefs.GetFloat("bestTime" + 1) + PlayerPrefs.GetFloat("bestTime" + 2) +PlayerPrefs.GetFloat("bestTime" + 3)
+            + PlayerPrefs.GetFloat("bestTime" + 4) + PlayerPrefs.GetFloat("bestTime" + 5) + PlayerPrefs.GetFloat("bestTime" + 6)
+            + PlayerPrefs.GetFloat("bestTime" + 7) + PlayerPrefs.GetFloat("bestTime" + 8) + PlayerPrefs.GetFloat("bestTime" + 9)
+            + PlayerPrefs.GetFloat("bestTime" + 10).ToString());
     }
     void ChangeColorToBlack()
     {

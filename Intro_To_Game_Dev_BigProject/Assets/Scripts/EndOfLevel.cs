@@ -14,6 +14,7 @@ public class EndOfLevel : MonoBehaviour {
     bool again = false;
     public bool levelDone;
     Timer myTime;
+    public AudioClip victorySound;
 	// Use this for initialization
 	void Start () {
        
@@ -37,7 +38,7 @@ public class EndOfLevel : MonoBehaviour {
     {
         if (c.gameObject.tag == "Player")
         {
-            
+            Sound.me.PlaySound(victorySound, 5f);
             Savetime();
             Debug.Log("anything");
             Debug.Log(myTime.time);
